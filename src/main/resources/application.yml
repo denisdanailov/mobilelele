@@ -2,8 +2,8 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/mobilelele_db?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
-    username: root
-    password: starwars2005
+    username: 
+    password: 
   sql:
     init:
       mode: always
