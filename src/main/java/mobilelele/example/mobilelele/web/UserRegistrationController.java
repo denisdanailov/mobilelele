@@ -42,7 +42,10 @@ public class UserRegistrationController {
     @PostMapping("users/register")
     public String userRegister(@Valid UserRegistrationBindingModel userRegisterModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+                               RedirectAttributes redirectAttributes,
+                               Model model) {
+
+        System.out.println(model.asMap());
 
         if (bindingResult.hasErrors() || !userRegisterModel.getPassword().equals(userRegisterModel.getConfirmPassword())) {
 
