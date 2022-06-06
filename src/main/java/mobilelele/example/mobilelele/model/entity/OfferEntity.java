@@ -3,9 +3,7 @@ package mobilelele.example.mobilelele.model.entity;
 import mobilelele.example.mobilelele.model.entity.enums.EngineEnum;
 import mobilelele.example.mobilelele.model.entity.enums.TransmissionEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "offers")

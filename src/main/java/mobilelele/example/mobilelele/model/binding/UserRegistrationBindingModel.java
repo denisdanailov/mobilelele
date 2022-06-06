@@ -1,21 +1,28 @@
 package mobilelele.example.mobilelele.model.binding;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class UserRegistrationBindingModel {
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 5, max = 30)
     private String firstName;
 
+    @NotEmpty
+    @Size(min = 5, max = 30)
     private String lastName;
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 5, max = 30)
     private String username;
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 5, max = 30)
     private String password;
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 5, max = 30)
     private String confirmPassword;
 
     public String getFirstName() {

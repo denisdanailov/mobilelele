@@ -1,7 +1,6 @@
 package mobilelele.example.mobilelele.web;
 
 import mobilelele.example.mobilelele.model.binding.UserLoginBindingModel;
-import mobilelele.example.mobilelele.model.binding.UserRegistrationBindingModel;
 import mobilelele.example.mobilelele.model.service.UserLoginServiceModel;
 import mobilelele.example.mobilelele.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -27,9 +26,9 @@ public class UserLoginController {
         this.modelMapper = modelMapper;
     }
 
-    @ModelAttribute(value = "userModel")
-    public UserRegistrationBindingModel userModel() {
-        return new UserRegistrationBindingModel();
+    @ModelAttribute(value = "userLoginModel")
+    public UserLoginBindingModel userLoginModel() {
+        return new UserLoginBindingModel();
     }
 
     @GetMapping("/users/login")
@@ -37,30 +36,24 @@ public class UserLoginController {
 
         if (!model.containsAttribute("isFound")) {
             model.addAttribute("isFound", true);
+            model.addAttribute("userLoginModel", userLoginModel());
         }
 
         return "auth-login";
     }
 
     @PostMapping("/users/login")
-    public String loginUser(@Valid UserLoginBindingModel userModel,
+    public String loginUser(@Valid UserLoginBindingModel userLoginModel,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes) {
 
+        UserLoginServiceModel userLoginServiceModel = userService.findByUsernameAndPassword(userLoginModel.getUsername(), userLoginModel.getPassword());
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || userLoginServiceModel == null) {
 
-            redirectAttributes.addFlashAttribute("userModel", userModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
-
-            return "redirect:login";
-        }
-
-        UserLoginServiceModel userLoginServiceModel = userService.findByUsernameAndPassword(userModel.getUsername(), userModel.getPassword());
-
-        if (userLoginServiceModel == null) {
-            redirectAttributes.addFlashAttribute("userModel", userModel);
+            redirectAttributes.addFlashAttribute("userLoginModel", userLoginModel);
             redirectAttributes.addFlashAttribute("isFound", false);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginModel", bindingResult);
 
             return "redirect:login";
         }

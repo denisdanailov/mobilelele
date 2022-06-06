@@ -1,12 +1,12 @@
 package mobilelele.example.mobilelele.model.view;
 
-import mobilelele.example.mobilelele.model.entity.ModelEntity;
+
 import mobilelele.example.mobilelele.model.entity.enums.EngineEnum;
 import mobilelele.example.mobilelele.model.entity.enums.TransmissionEnum;
 
-import javax.persistence.ManyToOne;
-
 public class OfferSummeryView {
+
+    private Long id;
 
     private String text;
 
@@ -23,6 +23,15 @@ public class OfferSummeryView {
     private int year;
 
     private String model;
+
+    public Long getId() {
+        return id;
+    }
+
+    public OfferSummeryView setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getText() {
         return text;
