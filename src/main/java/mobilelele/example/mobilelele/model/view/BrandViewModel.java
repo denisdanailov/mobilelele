@@ -1,75 +1,35 @@
 package mobilelele.example.mobilelele.model.view;
 
-public class BrandSummeryView {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String brandName;
+public class BrandViewModel {
 
-    private String modelName;
+    private String name;
 
-    private String categoryName;
+    private List<ModelViewModel> models = new ArrayList<>();
 
-    private int startYear;
-
-    private int endYear;
-
-    private String picture;
-
-    public String getBrandName() {
-        return brandName;
+    public List<ModelViewModel> getModels() {
+        return models;
     }
 
-    public BrandSummeryView setBrandName(String brandName) {
-        this.brandName = brandName;
+    public BrandViewModel addModel(ModelViewModel modelViewModel) {
+        this.models.add(modelViewModel);
         return this;
     }
 
-    public String getModelName() {
-        return modelName;
+    public String getName() {
+        return name;
     }
 
-    public BrandSummeryView setModelName(String modelName) {
-        this.modelName = modelName;
+    public BrandViewModel setName(String name) {
+        this.name = name;
         return this;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public BrandSummeryView setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public BrandViewModel setModels(List<ModelViewModel> models) {
+        this.models = models;
         return this;
     }
 
-    public int getStartYear() {
-        return startYear;
-    }
-
-    public BrandSummeryView setStartYear(int startYear) {
-        this.startYear = startYear;
-        return this;
-    }
-
-    public int getEndYear() {
-        return endYear;
-    }
-
-    public BrandSummeryView setEndYear(int endYear) {
-        this.endYear = endYear;
-        return this;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public BrandSummeryView setPicture(String picture) {
-        this.picture = picture;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return brandName;
-    }
 }
