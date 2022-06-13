@@ -3,21 +3,28 @@ package mobilelele.example.mobilelele.service.impl;
 import mobilelele.example.mobilelele.model.entity.BrandEntity;
 import mobilelele.example.mobilelele.model.entity.ModelEntity;
 import mobilelele.example.mobilelele.model.entity.enums.CategoryEnum;
+import mobilelele.example.mobilelele.model.view.ModelViewModel;
 import mobilelele.example.mobilelele.repository.BrandRepository;
 import mobilelele.example.mobilelele.repository.ModelRepository;
 import mobilelele.example.mobilelele.service.ModelService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ModelServiceImpl implements ModelService {
 
     private final ModelRepository modelRepository;
     private final BrandRepository brandRepository;
+    private final ModelMapper modelMapper;
 
 
-    public ModelServiceImpl(ModelRepository modelRepository, BrandRepository brandRepository) {
+    public ModelServiceImpl(ModelRepository modelRepository, BrandRepository brandRepository, ModelMapper modelMapper) {
         this.modelRepository = modelRepository;
         this.brandRepository = brandRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -40,4 +47,25 @@ public class ModelServiceImpl implements ModelService {
 
     }
 
+    @Override
+    public List<ModelViewModel> getModels() {
+        return modelRepository
+                .findAll()
+                .stream()
+                .map(this::map)
+                .collect(Collectors.toList());
+    }
+
+    private ModelViewModel map(ModelEntity modelEntity) {
+        ModelViewModel modelViewModel = this.modelMapper.map(modelEntity, ModelViewModel.class);
+
+        modelViewModel.setName(modelEntity.getName());
+
+
+        return modelViewModel;
+    }
+
 }
+
+
+
